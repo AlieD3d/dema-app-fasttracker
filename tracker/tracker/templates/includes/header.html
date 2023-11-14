@@ -1,0 +1,58 @@
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="{% url 'posts:index' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <span style="color:red; font-size: 25px;">F</span>
+            <span style="font-size: 20px">astTracker</span>
+        </a>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            {% with request.resolver_match.view_name as view_name %}
+              <li class="nav-item mx-2">
+                  <a href="#" class="nav-link px-2 text-white" style="font-size: 18px;">
+                      О нас
+                  </a>
+              </li>
+            {% endwith %}
+            {% if user.is_authenticated %}
+                {% with request.resolver_match.view_name as view_name %}
+                    <li class="nav-item mx-2">
+                        <a href="{% url 'posts:post_create' %}" class="nav-link px-2 text-white" style="font-size: 18px;">
+                            Новая задача
+                        </a>
+                    </li>
+                {% endwith %}
+                {% with request.resolver_match.view_name as view_name %}
+                    <li class="nav-item mx-2">
+                        <a href="{% url 'logout' %}" class="nav-link px-2 text-white" style="font-size: 19px;"">
+                            Выйти
+                        </a>
+                    </li>
+                {% endwith %}
+                <li>
+                    Пользователь: {{ user.username }}
+                </li>
+                {% else %}
+                    {% with request.resolver_match.view_name as view_name %}
+                    <li class="nav-item mx-2">
+                        <a href="{% url 'users:login' %}" class="nav-link px-2 text-white" style="font-size: 19px;">
+                            Войти
+                        </a>
+                    </li>
+                {% endwith %}
+                {% with request.resolver_match.view_name as view_name %}
+                    <li class="nav-item mx-2">
+                        <a href="{% url 'users:signup' %}" class="nav-link px-2 text-white" style="font-size: 18px;">
+                            Регистрация
+                        </a>
+                    </li>
+                {% endwith %}
+            {% endif %}
+        </ul>
+        <form class="d-flex" method="get" action="{% url 'posts:search_post' %}">
+        
+          <input type="search" class="form-control form-control-dark me-2" placeholder="Поиск по задачам..." aria-label="Поиск" name="q">
+          <button type="submit" class="btn btn-outline-success">Поиск</button>
+        </form>
+      </div>
+    </div>
+  </header>

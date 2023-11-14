@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Публикация избранных авторов{% endblock %}
+{% block content %}
+    <h1>Публикация избранных авторов</h1>
+    {% include 'posts/includes/site_card.html' %}
+    {% if not forloop.last %}<hr>{% endif %}
+    {% include 'posts/includes/paginator.html' %}
+{% endblock %}
